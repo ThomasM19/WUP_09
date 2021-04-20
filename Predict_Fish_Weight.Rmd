@@ -90,8 +90,7 @@ as.data.frame(summary.out$outmat)
 subsets(regsubsets.out,statistic="adjr2",legend="bottomright",main="Adjusted R^2")
 ```
  
- From the plot above we see that the two best regression models is LENGTH1, WIDTH and HEIGHT. The model of HEIGHT and WIDTH and LENGTH are the adjusted $r^2$ of 0.936. 
- 
+ From the plot above we see that the two best regression models is LENGTH1, WIDTH and HEIGHT. The model of HEIGHT and WIDTH and LENGTH are the adjusted $r^2$ of 0.940. 
  
 ## Which is best??  
 
@@ -111,4 +110,36 @@ The adjusted $r^2$ of HEIGHT and LENGTH2 is 0.9356. The residual standard error 
 
 # Smelt 
 
+```{r}
+library(leaps)
+regsubsets.out <-
+    regsubsets(Weight ~ .,
+               data = Smelt,
+               nbest = 1,       # 1 best model for each number of predictors
+               nvmax = NULL,    # NULL for no limit on number of variables
+               force.in = NULL, force.out = NULL,
+               method = "exhaustive")
 
+summary.out <- summary(regsubsets.out)
+as.data.frame(summary.out$outmat)
+subsets(regsubsets.out,statistic="adjr2",legend="bottomright",main="Adjusted R^2")
+```
+ 
+ From the plot above we see that the two best regression models is LENGTH1, WIDTH and HEIGHT. The model of HEIGHT and WIDTH and LENGTH are the adjusted $r^2$ of 0.936. 
+ 
+ 
+## Which is best??  
+
+```{r}
+which.max(summary.out$adjr2)
+```
+```{r}
+summary.out$which[3,]
+```
+
+```{r}
+SmeltModel <- lm(Weight~Height+Length2 ,data = Smelt)
+summary.lm(SmeltModel)
+```
+
+The adjusted $r^2$ of HEIGHT and LENGTH2 is 0.9418. The residual standard error of the two best regression models is 0.9968. 

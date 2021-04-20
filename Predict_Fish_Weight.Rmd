@@ -50,7 +50,8 @@ subsets(regsubsets.out,statistic="adjr2",legend="bottomright",main="Adjusted R^2
 ```
  
  From the plot above we see that the two best regression models are HEIGHT and WIDTH. The model of HEIGHT and WIDTH are the adjusted $r^2$ of 0.9400. 
-##Which is best??  
+ 
+## Which is best??  
 
 ```{r}
 which.max(summary.out$adjr2)

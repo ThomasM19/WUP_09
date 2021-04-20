@@ -48,7 +48,8 @@ summary.out <- summary(regsubsets.out)
 as.data.frame(summary.out$outmat)
 subsets(regsubsets.out,statistic="adjr2",legend="bottomright",main="Adjusted R^2")
 ```
-  
+ 
+ From the plot above we see that the two best regression models are HEIGHT and WIDTH. The model of HEIGHT and WIDTH are the adjusted $r^2$ of 0.9400. 
 ##Which is best??  
 
 ```{r}
@@ -57,6 +58,13 @@ which.max(summary.out$adjr2)
 ```{r}
 summary.out$which[3,]
 ```
+
+```{r}
+PerchModel <- lm(Weight~Height+Width ,data = Perch)
+summary.lm(PerchModel)
+```
+
+Here we get the adjusted $r^2$ is 0.94 which is the best model because $r^2$ is the highest. The residual standard error is 85.17
 
 
 
